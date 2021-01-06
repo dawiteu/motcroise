@@ -46,7 +46,7 @@ function preparegrille(nCol=0,nLig=0){
     let posW = []; 
 
     for(h=0; h < numberofwords; h++){
-        posW[h] = "ln"+randomPosition(); 
+        posW[h] = randomPosition(); 
     }
 
     console.log(posW); 
@@ -71,7 +71,7 @@ function preparegrille(nCol=0,nLig=0){
 
                     //let b = randomPosition();
                                                                                         // chars.charAt(tabCols[j])
-                    document.querySelector('div#n'+i).innerHTML+="<div class='let' id='ln"+i+j+"'>"+0+"</div>";  
+                    document.querySelector('div#n'+i).innerHTML+="<div class='let' id='l"+i+"n"+j+"'>"+0+"</div>";  
 
                     /*
                     for(k=0; k<numberofwords; k++){
@@ -110,17 +110,33 @@ function preparegrille(nCol=0,nLig=0){
             document.querySelector("#"+posW[k]).style.cssText="background-color:red;";
 
             console.log(posW[k]); 
+            spittedpos = posW[k].split('n');
+            console.log(spittedpos); 
+
             for(l=1; l<wordLength;l++){
                 //tabWord[k] = tabWord[k].substring(1);
-                posit = parseInt(posW[k].substring(2));
+                //posit = parseInt(posW[k].substring(2));
 
-                let tabtemp = tabWord[k].split('');
-                position = "ln"+(posit+l);
-                console.log(`position: ${position} lettre : ${tabtemp[l]}`)
+                let tabtemp = tabWord[k];
+                console.log(tabtemp);
+                //tabtemp[0] = tabtemp[0].substring(1); 
+
+                //console.log(tabtemp, tabtemp[0], tabtemp[1]);
+                //position = (spittedpos[0]+"n"+parseInt((spittedpos[1]+l))); //posit+l;
+                //console.log(spittedpos[0], spittedpos[1]);
+                spittedpos[1] = parseInt(spittedpos[1]);
+                
+                spittedpos[1] = spittedpos[1]+1;
+                position = spittedpos[0]+"n"+spittedpos[1]; 
+
+                console.log(`position: ${position} lettre : ${tabtemp[l]}`);
                 //console.log();
                 document.querySelector("#"+position).innerHTML=tabtemp[l];
                 document.querySelector("#"+position).style.cssText="background-color:green;";
 
+                // !!! TO DO IMPORTANT !!! 
+                // faire que si le nombre de caracteres depassera la cologne, inverse le mot ! le mettre dans l'autre sense genre: TARARUJ --> JURARAT ;)) 
+                
             }
         }
 
@@ -162,7 +178,7 @@ function randomPosition(){
 
     let rRow = (Math.round(Math.random() * 14) + 1).toString(); //9 si 11-19 + 110 / 21-29+210 etc ; 
     let rCol = (Math.round(Math.random() * 14) + 1).toString();
-    let result = rRow+""+rCol; 
+    let result = "l"+rRow+"n"+rCol; 
 
     return result;
 }
