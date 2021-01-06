@@ -1,0 +1,40 @@
+body{
+    background-color: #ccc;
+    color:#2d2d2d; 
+    font-family: 'Courier New', Courier, monospace;
+    font-size:2em;
+}
+
+div#container{
+    width:55%; 
+    height:60%; 
+    background-color: red;
+    margin:10% auto; 
+    display:flex;
+}
+div#grille{
+    width:70%;
+    height:100%; 
+   /* display:flex;
+    flex-wrap:wrap;
+    justify-content:center;*/
+}
+
+div.row{
+    background-color: blue;
+    display:flex;  
+    flex-wrap:nowrap;
+    border-bottom:2px solid black; 
+    text-align: center;
+}
+div.let{
+    width:100%;
+    background-color: yellow;
+    padding:5px;
+    border:1px solid red;
+}
+div#mots{
+    width:30%; 
+    height:100%; 
+    border-left:1px solid black; 
+}
