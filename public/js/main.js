@@ -5,7 +5,7 @@ let numberofwords = parseInt(prompt("Entre le num de mots que tu va entrer pour 
 
 let tabWord = []; 
 let newWordTab = []; 
-
+let tabPlacesUsedByScript = []; 
 
 if(numberofwords >= 1){
     spannow = document.querySelector('span#nof'); 
@@ -114,26 +114,24 @@ function preparegrille(nCol=0,nLig=0){
             console.log(spittedpos); 
 
             for(l=1; l<wordLength;l++){
-                //tabWord[k] = tabWord[k].substring(1);
-                //posit = parseInt(posW[k].substring(2));
-
                 let tabtemp = tabWord[k];
-                console.log(tabtemp);
-                //tabtemp[0] = tabtemp[0].substring(1); 
-
-                //console.log(tabtemp, tabtemp[0], tabtemp[1]);
-                //position = (spittedpos[0]+"n"+parseInt((spittedpos[1]+l))); //posit+l;
-                //console.log(spittedpos[0], spittedpos[1]);
                 spittedpos[1] = parseInt(spittedpos[1]);
-                
-                spittedpos[1] = spittedpos[1]+1;
-                position = spittedpos[0]+"n"+spittedpos[1]; 
 
-                console.log(`position: ${position} lettre : ${tabtemp[l]}`);
-                //console.log();
-                document.querySelector("#"+position).innerHTML=tabtemp[l];
-                document.querySelector("#"+position).style.cssText="background-color:green;";
+                if(tabtemp.length + spittedpos[1] <= 15){
+                    spittedpos[1] = spittedpos[1]+1;
+                    position = spittedpos[0]+"n"+spittedpos[1]; 
 
+                    console.log(`position: ${position} lettre : ${tabtemp[l]}`);
+                    document.querySelector("#"+position).innerHTML=tabtemp[l];
+                    document.querySelector("#"+position).style.cssText="background-color:green;";
+                }else{
+                    spittedpos[1] = spittedpos[1]-1;
+                    position = spittedpos[0]+"n"+spittedpos[1]; 
+    
+                    console.log(`position: ${position} lettre : ${tabtemp[l]}`);
+                    document.querySelector("#"+position).innerHTML=tabtemp[l];
+                    document.querySelector("#"+position).style.cssText="background-color:blue;";
+                }
                 // !!! TO DO IMPORTANT !!! 
                 // faire que si le nombre de caracteres depassera la cologne, inverse le mot ! le mettre dans l'autre sense genre: TARARUJ --> JURARAT ;)) 
                 
