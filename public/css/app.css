@@ -2,14 +2,14 @@ body{
     background-color: #ccc;
     color:#2d2d2d; 
     font-family: 'Courier New', Courier, monospace;
-    font-size:2em;
+    font-size:1.5em;
 }
 
 div#container{
-    width:55%; 
+    width:80%; 
     height:60%; 
     background-color: red;
-    margin:10% auto; 
+    margin:5% auto; 
     display:flex;
 }
 div#grille{
@@ -32,6 +32,11 @@ div.let{
     background-color: yellow;
     padding:5px;
     border:1px solid red;
+    cursor:grab;
+}
+
+div.let:active{
+    cursor:grabbing;
 }
 div#mots{
     width:30%; 

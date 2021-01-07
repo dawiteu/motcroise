@@ -3,9 +3,9 @@ let divGril = document.querySelector('div#grille');
 
 let numberofwords = parseInt(prompt("Entre le num de mots que tu va entrer pour le jeu. "));
 
-let tabWord = []; 
-let newWordTab = []; 
-let tabPlacesUsedByScript = []; 
+let tabWord = [];  // tableau avec les mots que luser va entrer 
+let newWordTab = [];  // tableau avec les mots decomposes en lettres ; 
+let tabPlacesUsedByScript = []; // on stock ici les position utiliseer par le script, genre le l1n10 = rangee 1 case derniere; etc 
 
 if(numberofwords >= 1){
     spannow = document.querySelector('span#nof'); 
@@ -58,84 +58,89 @@ function preparegrille(nCol=0,nLig=0){
 
     if(nCol == 0 && nLig == 0){
         let randomPos = []; 
-
         for(i=1; i <= 15; i++){
             let prep = "<div class='row' id='n"+i+"'>"; //console.log(prep); 
             divGril.innerHTML+=prep; 
-
             for(j=1; j <= 15; j++){
-
-                //let randomchar = Math.floor(Math.random() * chars.length); 
-                //tabCols[j] = randomchar; 
-                //tabRows[i] = tabCols[j];
-
-                    //let b = randomPosition();
-                                                                                        // chars.charAt(tabCols[j])
-                    document.querySelector('div#n'+i).innerHTML+="<div class='let' id='l"+i+"n"+j+"'>"+0+"</div>";  
-
-                    /*
-                    for(k=0; k<numberofwords; k++){
-                        console.log(k); 
-                        if( document.querySelector('#ln'+i+j).getAttribute('id') == posW[k] ) {
-                            console.log(`${document.querySelector('#ln'+i+j).getAttribute('id')} - ${posW[k]} `)
-                            document.querySelector('div#n'+i).innerHTML+="<div class='let' id='ln"+i+j+"'>"+posW[k].charAt(0)+"</div>";  
-                        }
-                        console.log(posW);
-                       // posW // posW
-                       //document.querySelector('div#n'+i).innerHTML+="<div class='let' id='ln"+i+j+"'>"+"25!"+"</div>";  
-                    }
-
-                    */
-
-                    /*
-                    for(k=0; k < numberofwords; k++){
-                        let b = randomPosition();
-                        console.log(b); 
-                        let length = tabWord[k].length; 
-                        if(k == b) document.querySelector('div#n'+i).innerHTML+="<div class='let' id='ln"+i+j+"'>"+tabWord[k].charAt(0)+"</div>";
-                        console.log(tabWord[k].charAt(0)); 
-                    }
-                    */
-                //console.log(tabCols);
-
+                let randomchar = Math.floor(Math.random() * chars.length); 
+                document.querySelector('div#n'+i).innerHTML+="<div class='let' id='l"+i+"n"+j+"'>"+chars.charAt(randomchar)+"</div>";  
             }
             divGril.innerHTML+="</div>";
         }
-        //console.log(posW[k]);
-        a=0;
         for(k=0; k<numberofwords; k++){
             let wordLength = tabWord[k].length; 
-            console.log(`Le mot ${tabWord[k]} a ${wordLength} lettres;`);
+            console.log(tabWord[k]);
+            console.log(`Le mot ${tabWord[k]} a ${wordLength} lettres; Il commencera ${posW[k]}`);
             document.querySelector("#"+posW[k]).innerHTML=tabWord[k].charAt(0); 
             document.querySelector("#"+posW[k]).style.cssText="background-color:red;";
 
-            console.log(posW[k]); 
+            tabPlacesUsedByScript.push(posW[k]);
+
+            //console.log(posW[k]); 
             spittedpos = posW[k].split('n');
             console.log(spittedpos); 
 
-            for(l=1; l<wordLength;l++){
+            //for(l=1; l<wordLength;l++){
                 let tabtemp = tabWord[k];
+                spittedpos[0] = spittedpos[0].substring(1);
+                console.log(typeof spittedpos[0]);
+                spittedpos[0] = parseInt(spittedpos[0]);
+                console.log(typeof spittedpos[0]);
                 spittedpos[1] = parseInt(spittedpos[1]);
-
-                if(tabtemp.length + spittedpos[1] <= 15){
-                    spittedpos[1] = spittedpos[1]+1;
-                    position = spittedpos[0]+"n"+spittedpos[1]; 
-
-                    console.log(`position: ${position} lettre : ${tabtemp[l]}`);
-                    document.querySelector("#"+position).innerHTML=tabtemp[l];
-                    document.querySelector("#"+position).style.cssText="background-color:green;";
+                /*
+                if(tabtemp.length + spittedpos[1] <= 15){ // faut changer sur 20 ou 25 
+                    for(m=1; m<tabtemp.length;m++){
+                        spittedpos[1] = spittedpos[1]+1;
+                        position = spittedpos[0]+"n"+spittedpos[1]; 
+                                // tabPlacesUsedByScript ;;; !!!!!!!!!!!!!!!!!
+                        console.log(`position: ${position} lettre : ${tabtemp[m]}`);
+                        document.querySelector("#"+position).innerHTML=tabtemp[m];
+                        document.querySelector("#"+position).style.cssText="background-color:green;";
+                    }
                 }else{
-                    spittedpos[1] = spittedpos[1]-1;
-                    position = spittedpos[0]+"n"+spittedpos[1]; 
-    
-                    console.log(`position: ${position} lettre : ${tabtemp[l]}`);
-                    document.querySelector("#"+position).innerHTML=tabtemp[l];
-                    document.querySelector("#"+position).style.cssText="background-color:blue;";
+                    for(m=1; m<tabtemp.length;m++){
+                        spittedpos[1] = spittedpos[1]-1;
+                        position = spittedpos[0]+"n"+spittedpos[1]; 
+                                        // tabPlacesUsedByScript ;; !!!!!!!!!
+                        console.log(`position: ${position} lettre : ${tabtemp[m]}`);
+                        document.querySelector("#"+position).innerHTML=tabtemp[m];
+                        document.querySelector("#"+position).style.cssText="background-color:blue;";
+                    }
+                }*/
+                // test
+                //console.log(`wlenght = ${wordLength} ET ${spittedpos[0]} ==>  ${wordLength+spittedpos[0]} `);
+
+                if((wordLength + spittedpos[0])-1 <= 15){
+                    for(n=1; n < wordLength; n++){
+                        spittedpos[0] = spittedpos[0]+1;
+                        position = "l"+spittedpos[0]+"n"+spittedpos[1]; 
+
+                        tabPlacesUsedByScript.push(position);
+
+                        console.log(`position: ${position} lettre : ${tabtemp[n]}`);
+                        document.querySelector("#"+position).innerHTML=tabtemp[n];
+                        document.querySelector("#"+position).style.cssText="background-color:cyan;";   
+                    }
+                }else{
+                    for(n=1; n < wordLength; n++){
+                        spittedpos[0] = spittedpos[0]-1;
+                        position = "l"+spittedpos[0]+"n"+spittedpos[1]; 
+
+                        
+                        tabPlacesUsedByScript.push(position);
+
+                        console.log(`position: ${position} lettre : ${tabtemp[n]}`);
+                        document.querySelector("#"+position).innerHTML=tabtemp[n];
+                        document.querySelector("#"+position).style.cssText="background-color:#ccc;";   
+                    }
                 }
+
+                //endtest
+
                 // !!! TO DO IMPORTANT !!! 
                 // faire que si le nombre de caracteres depassera la cologne, inverse le mot ! le mettre dans l'autre sense genre: TARARUJ --> JURARAT ;)) 
                 
-            }
+            //}
         }
 
 
@@ -170,8 +175,12 @@ function preparegrille(nCol=0,nLig=0){
 
 
     }
+    console.log(tabPlacesUsedByScript);
 }
 
+function checkSiDejaUt(pos){
+    return tabPlacesUsedByScript.includes(pos);
+}
 function randomPosition(){
 
     let rRow = (Math.round(Math.random() * 14) + 1).toString(); //9 si 11-19 + 110 / 21-29+210 etc ; 
